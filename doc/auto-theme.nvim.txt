@@ -1,86 +1,47 @@
-*auto-theme.nvim.txt*    Zero-polling automatic theme switching for Neovim
+*auto-theme.nvim.txt*    The only zero-polling automatic theme switcher for Neovim
+
+Author:  Barrett Ruth <br.barrettruth@gmail.com>
+License: MIT
 
 ==============================================================================
-CONTENTS                                            *auto-theme-contents*
+INTRODUCTION                                           *auto-theme.nvim* *auto-theme*
 
-  1. Introduction .......................... |auto-theme-introduction|
-  2. Requirements .......................... |auto-theme-requirements|
-  3. Installation .......................... |auto-theme-installation|
-  4. Configuration ......................... |auto-theme-configuration|
-  5. Commands .............................. |auto-theme-commands|
-  6. API ................................... |auto-theme-api|
+auto-theme.nvim automatically switches Neovim themes based on system dark/light
+mode using native OS events.
+
+Supports Linux & macOS.
 
 ==============================================================================
-INTRODUCTION                                    *auto-theme-introduction*
+REQUIREMENTS                                          *auto-theme-requirements*
 
-auto-theme.nvim automatically switches your Neovim theme based on your
-system's dark/light mode preference using native OS events. No polling,
-no timers, just instant theme switching.
-
-==============================================================================
-REQUIREMENTS                                    *auto-theme-requirements*
-
-- Neovim >= 0.10.0
-- uv (for macOS support)
-- Python >= 3.12 (for macOS support)
+- Neovim 0.10.0+
+- uv (macOS only)
+- Python 3.12+ (macOS only)
 
 ==============================================================================
-INSTALLATION                                    *auto-theme-installation*
+CONFIGURATION                                         *auto-theme-configuration*
 
-Using lazy.nvim:
->lua
-  {
-    'barrett-ruth/auto-theme.nvim',
-    lazy = true,
-    init = function()
-      vim.g.auto_theme_dark = 'tokyonight'
-      vim.g.auto_theme_light = 'dawn'
-    end
-  }
-<
+*vim.g.auto_theme_dark*           Dark theme (default: 'default')
+*vim.g.auto_theme_light*          Light theme (default: 'default')
+*vim.g.auto_theme_debug*          Enable debug logging
+*vim.g.auto_theme_disable*        Disable auto-start
 
 ==============================================================================
-CONFIGURATION                                  *auto-theme-configuration*
+COMMANDS                                                  *auto-theme-commands*
 
-Configure using vim.g variables:
-
-*vim.g.auto_theme_dark*
-    Your preferred dark theme (default: 'default')
-
-*vim.g.auto_theme_light*
-    Your preferred light theme (default: 'default')
-
-*vim.g.auto_theme_debug*
-    Enable debug logging (default: false)
-
-*vim.g.auto_theme_disable*
-    Disable automatic startup (default: false)
+:AutoTheme                                                        *:AutoTheme*
+        status     Show current theme
+        refresh    Refresh theme
+        enable     Enable auto-switching
+        disable    Disable auto-switching
 
 ==============================================================================
-COMMANDS                                            *auto-theme-commands*
+API                                                            *auto-theme-api*
 
-*:AutoTheme* {command}
-    Execute auto-theme commands
-
-    status    Show current theme and configuration
-    refresh   Manually refresh theme
-    enable    Enable automatic theme switching
-    disable   Disable automatic theme switching
-
-==============================================================================
-API                                                      *auto-theme-api*
-
-*auto-theme.setup()*
-    Initialize and start the theme watcher
-
-*auto-theme.stop()*
-    Stop the theme watcher
-
-*auto-theme.refresh()*
-    Manually refresh the theme
-
-*auto-theme.get_current_theme()*
-    Returns the current theme mode ('dark' or 'light')
+*require('auto-theme').setup()*      Start theme watcher
+*require('auto-theme').stop()*       Stop theme watcher
+*require('auto-theme').refresh()*    Refresh theme
+*require('auto-theme').get_current_theme()*  Get current mode ('dark'/'light')
 
 ==============================================================================
 vim:tw=78:ts=8:ft=help:norl:

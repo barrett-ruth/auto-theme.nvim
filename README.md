@@ -1,8 +1,8 @@
 # auto-theme.nvim
 
-**\*The only zero-polling automatic theme switcher for Neovim.**
+**The only zero-polling automatic theme switcher for Neovim**
 
-Supports Linux & OSX.
+Supports Linux & macOS.
 
 ## Requirements
 
@@ -27,10 +27,8 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ## Configuration
 
-```lua
-vim.g.auto_theme_dark = 'tokyonight'
-vim.g.auto_theme_light = 'dawn'
-vim.g.auto_theme_debug = true
+```vim
+:help auto-theme.nvim
 ```
 
 ## Documentation
