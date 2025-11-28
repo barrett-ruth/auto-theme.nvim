@@ -17,10 +17,9 @@ def get_initial_theme(settings_interface):
     try:
         result = settings_interface.Read("org.freedesktop.appearance", "color-scheme")
         if result:
-            value = result[0]
-            theme_value = value if isinstance(value, int) else value
+            theme_value = result if isinstance(result, int) else int(result)
             print("DARK" if theme_value == 1 else "LIGHT", flush=True)
-    except (dbus.DBusException, KeyError, IndexError):
+    except (dbus.DBusException, KeyError, IndexError, ValueError):
         print("DARK", flush=True)
 
 
