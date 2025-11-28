@@ -71,7 +71,7 @@ function M._start_macos_watcher()
 end
 
 function M._start_linux_watcher()
-  logger.debug('Linux watcher will be implemented in Step 2')
+  logger.debug('Linux watcher not yet implemented')
 end
 
 return M

@@ -35,6 +35,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ## Similar Projects
 
+- [system-theme.nvim](https://github.com/cosmicboots/system-theme.nvim)
 - [auto-dark-mode.nvim](https://github.com/f-person/auto-dark-mode.nvim)
 - [auto-gnome-theme.nvim](https://github.com/itsfernn/auto-gnome-theme.nvim)
 - [circadian.nvim](https://github.com/gagbo/circadian.nvim)
