@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import sys
 
 import objc
 from AppKit import NSApp, NSAppearance, NSApplication
