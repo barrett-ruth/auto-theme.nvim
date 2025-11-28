@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import signal
 import sys
-from typing import Any, Union
+from typing import Any
 
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
