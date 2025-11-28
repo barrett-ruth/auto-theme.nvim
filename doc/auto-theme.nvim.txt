@@ -15,8 +15,8 @@ Supports Linux & macOS.
 REQUIREMENTS                                          *auto-theme-requirements*
 
 - Neovim 0.10.0+
-- uv (macOS only)
-- Python 3.12+ (macOS only)
+- uv
+- Python 3.12+
 
 ==============================================================================
 CONFIGURATION                                         *auto-theme-configuration*
