@@ -36,7 +36,7 @@ function M.get_system_mode()
       return result:find('dark') ~= nil
     end
   end
-  return false
+  return true
 end
 
 function M.set_mode(is_dark)

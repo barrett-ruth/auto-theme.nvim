@@ -20,8 +20,8 @@ def get_initial_theme(settings_interface):
             value = result[0]
             theme_value = value if isinstance(value, int) else value
             print("DARK" if theme_value == 1 else "LIGHT", flush=True)
-    except:
-        print("LIGHT", flush=True)
+    except (dbus.DBusException, KeyError, IndexError):
+        print("DARK", flush=True)
 
 
 def main():
