@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from typing import Any, Optional
 
 import objc
 from AppKit import NSApp, NSAppearance, NSApplication
@@ -6,7 +7,7 @@ from Foundation import NSDistributedNotificationCenter, NSObject
 from PyObjCTools import AppHelper
 
 
-def get_current_theme():
+def get_current_theme() -> str:
     app = NSApp()
     if app is None:
         app = NSApplication.sharedApplication()
@@ -24,7 +25,7 @@ def get_current_theme():
 
 
 class ThemeObserver(NSObject):
-    def init(self):
+    def init(self) -> Optional["ThemeObserver"]:
         self = objc.super(ThemeObserver, self).init()
         if self is None:
             return None
@@ -42,7 +43,7 @@ class ThemeObserver(NSObject):
         )
         return self
 
-    def themeChanged_(self, notification):
+    def themeChanged_(self, notification: Any) -> None:
         new_theme = get_current_theme()
         if new_theme != getattr(self, "currentTheme", None):
             self.currentTheme = new_theme
