@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 import signal
 import sys
+from typing import Any
 
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository import GLib
 
 
-def handle_settings_changed(namespace, key, value):
+def handle_settings_changed(namespace: str, key: str, value: Any) -> None:
     if namespace == "org.freedesktop.appearance" and key == "color-scheme":
         theme_value = value if isinstance(value, int) else value
         print("DARK" if theme_value == 1 else "LIGHT", flush=True)
 
 
-def get_initial_theme(settings_interface):
+def get_initial_theme(settings_interface: dbus.Interface) -> None:
     try:
         result = settings_interface.Read("org.freedesktop.appearance", "color-scheme")
         if result:
@@ -23,7 +24,7 @@ def get_initial_theme(settings_interface):
         print("DARK", flush=True)
 
 
-def main():
+def main() -> None:
     DBusGMainLoop(set_as_default=True)
     bus = dbus.SessionBus()
 
@@ -43,7 +44,7 @@ def main():
 
         loop = GLib.MainLoop()
 
-        def signal_handler(sig, frame):
+        def signal_handler(sig: int, frame: Any) -> None:
             loop.quit()
             sys.exit(0)
 

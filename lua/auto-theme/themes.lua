@@ -7,33 +7,40 @@ local current_mode = nil
 
 function M.get_system_mode()
   if vim.fn.has('mac') == 1 then
-    local handle = io.popen('defaults read -g AppleInterfaceStyle 2>/dev/null')
-    if handle then
-      local result = handle:read('*a')
-      handle:close()
-      return vim.trim(result) == 'Dark'
+    local result = vim
+      .system({ 'defaults', 'read', '-g', 'AppleInterfaceStyle' }, { text = true })
+      :wait()
+    if result.code == 0 then
+      return vim.trim(result.stdout) == 'Dark'
     end
   elseif vim.fn.has('unix') == 1 then
-    -- Try freedesktop portal color-scheme first (most universal)
-    local handle = io.popen(
-      'gdbus call --session --dest org.freedesktop.portal.Desktop --object-path /org/freedesktop/portal/desktop --method org.freedesktop.portal.Settings.Read "org.freedesktop.appearance" "color-scheme" 2>/dev/null'
-    )
-    if handle then
-      local result = handle:read('*a')
-      handle:close()
-      -- Output format: (<<uint32 1>>,) for dark, (<<uint32 0>>,) for light
-      local value = result:match('uint32%s+(%d+)')
+    local result = vim
+      .system({
+        'gdbus',
+        'call',
+        '--session',
+        '--dest',
+        'org.freedesktop.portal.Desktop',
+        '--object-path',
+        '/org/freedesktop/portal/desktop',
+        '--method',
+        'org.freedesktop.portal.Settings.Read',
+        'org.freedesktop.appearance',
+        'color-scheme',
+      }, { text = true })
+      :wait()
+    if result.code == 0 then
+      local value = result.stdout:match('uint32%s+(%d+)')
       if value then
         return value == '1'
       end
     end
 
-    -- Fallback to gsettings gtk-theme check
-    handle = io.popen('gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null')
-    if handle then
-      local result = handle:read('*a'):lower()
-      handle:close()
-      return result:find('dark') ~= nil
+    result = vim
+      .system({ 'gsettings', 'get', 'org.gnome.desktop.interface', 'gtk-theme' }, { text = true })
+      :wait()
+    if result.code == 0 then
+      return result.stdout:lower():find('dark') ~= nil
     end
   end
   return true

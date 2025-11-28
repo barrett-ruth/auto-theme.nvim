@@ -13,8 +13,6 @@ function M.check()
   local ok, cfg = pcall(config.validate)
   if ok then
     vim.health.ok('Configuration valid')
-    vim.health.info('Dark theme: ' .. cfg.dark)
-    vim.health.info('Light theme: ' .. cfg.light)
   else
     vim.health.error('Invalid configuration', tostring(cfg))
   end
@@ -31,19 +29,27 @@ function M.check()
       vim.health.warn('macOS watcher script not found')
     end
 
-    local handle = io.popen('uv --version 2>&1')
-    if handle then
-      local result = handle:read('*a')
-      handle:close()
-      if result:find('uv') then
-        vim.health.ok('uv found: ' .. vim.trim(result))
-      else
-        vim.health.error('uv not found')
-      end
+    local result = vim.system({ 'uv', '--version' }, { text = true }):wait()
+    if result.code == 0 then
+      vim.health.ok('uv found: ' .. vim.trim(result.stdout))
+    else
+      vim.health.error('uv not found')
     end
   elseif is_linux then
     vim.health.ok('Linux platform detected')
-    vim.health.info('Linux watcher will be implemented in pure Lua')
+    local python_script = vim.fn.stdpath('data') .. '/lazy/auto-theme.nvim/watchers/linux.py'
+    if vim.fn.filereadable(python_script) == 1 then
+      vim.health.ok('Linux watcher script found')
+    else
+      vim.health.warn('Linux watcher script not found')
+    end
+
+    local result = vim.system({ 'uv', '--version' }, { text = true }):wait()
+    if result.code == 0 then
+      vim.health.ok('uv found: ' .. vim.trim(result.stdout))
+    else
+      vim.health.error('uv not found')
+    end
   else
     vim.health.warn('Unsupported platform')
   end
