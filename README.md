@@ -17,8 +17,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 ```lua
 {
   'barrett-ruth/auto-theme.nvim',
-  lazy = false,
-  priority = 1000,
+  lazy = true,
   init = function()
     vim.g.auto_theme_dark = 'tokyonight'
     vim.g.auto_theme_light = 'dawn'
@@ -32,7 +31,6 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 vim.g.auto_theme_dark = 'tokyonight'
 vim.g.auto_theme_light = 'dawn'
 vim.g.auto_theme_debug = true
-vim.g.auto_theme_disable = true  -- Disable auto-start
 ```
 
 ## Documentation

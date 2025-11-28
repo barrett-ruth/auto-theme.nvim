@@ -31,8 +31,7 @@ Using lazy.nvim:
 >lua
   {
     'barrett-ruth/auto-theme.nvim',
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     init = function()
       vim.g.auto_theme_dark = 'tokyonight'
       vim.g.auto_theme_light = 'dawn'
