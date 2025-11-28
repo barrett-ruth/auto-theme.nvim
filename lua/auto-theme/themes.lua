@@ -14,7 +14,22 @@ function M.get_system_mode()
       return vim.trim(result) == 'Dark'
     end
   elseif vim.fn.has('unix') == 1 then
-    local handle = io.popen('gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null')
+    -- Try freedesktop portal color-scheme first (most universal)
+    local handle = io.popen(
+      'gdbus call --session --dest org.freedesktop.portal.Desktop --object-path /org/freedesktop/portal/desktop --method org.freedesktop.portal.Settings.Read "org.freedesktop.appearance" "color-scheme" 2>/dev/null'
+    )
+    if handle then
+      local result = handle:read('*a')
+      handle:close()
+      -- Output format: (<<uint32 1>>,) for dark, (<<uint32 0>>,) for light
+      local value = result:match('uint32%s+(%d+)')
+      if value then
+        return value == '1'
+      end
+    end
+
+    -- Fallback to gsettings gtk-theme check
+    handle = io.popen('gsettings get org.gnome.desktop.interface gtk-theme 2>/dev/null')
     if handle then
       local result = handle:read('*a'):lower()
       handle:close()
