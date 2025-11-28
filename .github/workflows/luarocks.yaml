@@ -1,6 +1,7 @@
 name: Luarocks
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - '*'
