@@ -1,0 +1,15 @@
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv
+uv.lock
+doc/tags
+*.log
+CLAUDE.md
+main.py
