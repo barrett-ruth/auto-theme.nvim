@@ -30,13 +30,15 @@ function M.stop()
 end
 
 function M._start_macos_watcher()
-  local python_script = vim.fn.stdpath('data') .. '/lazy/auto-theme.nvim/watchers/macos.py'
+  local plugin_dir = vim.fn.stdpath('data') .. '/lazy/auto-theme.nvim'
+  local python_script = plugin_dir .. '/watchers/macos.py'
   if vim.fn.filereadable(python_script) == 0 then
     logger.log('macOS watcher script not found', vim.log.levels.ERROR)
     return
   end
 
   job_id = vim.fn.jobstart({ 'uv', 'run', 'python', python_script }, {
+    cwd = plugin_dir,
     on_stdout = function(_, data, _)
       for _, line in ipairs(data) do
         if line ~= '' then
@@ -71,13 +73,15 @@ function M._start_macos_watcher()
 end
 
 function M._start_linux_watcher()
-  local python_script = vim.fn.stdpath('data') .. '/lazy/auto-theme.nvim/watchers/linux.py'
+  local plugin_dir = vim.fn.stdpath('data') .. '/lazy/auto-theme.nvim'
+  local python_script = plugin_dir .. '/watchers/linux.py'
   if vim.fn.filereadable(python_script) == 0 then
     logger.log('Linux watcher script not found', vim.log.levels.ERROR)
     return
   end
 
   job_id = vim.fn.jobstart({ 'uv', 'run', 'python', python_script }, {
+    cwd = plugin_dir,
     on_stdout = function(_, data, _)
       for _, line in ipairs(data) do
         if line ~= '' then
