@@ -2,6 +2,8 @@
 
 **The only zero-polling automatic theme switcher for Neovim**
 
+https://github.com/user-attachments/assets/cc3a93d3-0ed2-448f-b97e-a133de769626
+
 Supports Linux & macOS.
 
 ## Requirements
@@ -24,6 +26,8 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
   end
 }
 ```
+
+> NOTE: Your theme must be loaded _before_ auto-theme.nvim is.
 
 ## Documentation
 
