@@ -18,7 +18,7 @@ def get_current_theme():
         appearance = NSAppearance.currentAppearance()
 
     name = appearance.name() if appearance is not None else None
-    if name and "Dark" in str(name):
+    if not name or "Dark" in str(name):
         return "DARK"
     return "LIGHT"
 
