@@ -33,10 +33,9 @@ Using lazy.nvim:
     'barrett-ruth/auto-theme.nvim',
     lazy = false,
     priority = 1000,
-    config = function()
+    init = function()
       vim.g.auto_theme_dark = 'tokyonight'
       vim.g.auto_theme_light = 'dawn'
-      require('auto-theme').setup()
     end
   }
 <
@@ -54,6 +53,9 @@ Configure using vim.g variables:
 
 *vim.g.auto_theme_debug*
     Enable debug logging (default: false)
+
+*vim.g.auto_theme_disable*
+    Disable automatic startup (default: false)
 
 ==============================================================================
 COMMANDS                                            *auto-theme-commands*

@@ -3,6 +3,15 @@ if vim.g.loaded_auto_theme then
 end
 vim.g.loaded_auto_theme = 1
 
+if vim.g.auto_theme_disable ~= true then
+  vim.api.nvim_create_autocmd('VimEnter', {
+    callback = function()
+      require('auto-theme').setup()
+    end,
+    once = true,
+  })
+end
+
 vim.api.nvim_create_user_command('AutoTheme', function(opts)
   local auto_theme = require('auto-theme')
   auto_theme.handle_command(opts)

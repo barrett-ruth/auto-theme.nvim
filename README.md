@@ -1,13 +1,8 @@
 # auto-theme.nvim
 
-Zero-polling automatic theme switching for Neovim.
+**\*The only zero-polling automatic theme switcher for Neovim.**
 
-## Features
-
-- Zero polling: Uses native OS events for instant theme switching
-- Cross-platform: macOS and Linux support
-- Simple configuration: Just set your preferred themes via `vim.g` variables
-- Lightweight: Minimal overhead with event-driven architecture
+Supports Linux & OSX.
 
 ## Requirements
 
@@ -24,10 +19,9 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
   'barrett-ruth/auto-theme.nvim',
   lazy = false,
   priority = 1000,
-  config = function()
+  init = function()
     vim.g.auto_theme_dark = 'tokyonight'
     vim.g.auto_theme_light = 'dawn'
-    require('auto-theme').setup()
   end
 }
 ```
@@ -38,27 +32,13 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 vim.g.auto_theme_dark = 'tokyonight'
 vim.g.auto_theme_light = 'dawn'
 vim.g.auto_theme_debug = true
-
-require('auto-theme').setup()
+vim.g.auto_theme_disable = true  -- Disable auto-start
 ```
 
-## Commands
+## Documentation
 
-- `:AutoTheme status` - Show current theme and configuration
-- `:AutoTheme refresh` - Manually refresh theme based on system preference
-- `:AutoTheme enable` - Enable automatic theme switching
-- `:AutoTheme disable` - Disable automatic theme switching
+## Similar Projects
 
-## How It Works
-
-### macOS
-
-Uses `NSDistributedNotificationCenter` to listen for `AppleInterfaceThemeChangedNotification` events.
-
-### Linux
-
-Subscribes to D-Bus signals from `org.freedesktop.portal.Settings` for color-scheme changes.
-
-## License
-
-MIT
+- [auto-dark-mode.nvim](https://github.com/f-person/auto-dark-mode.nvim)
+- [auto-gnome-theme.nvim](https://github.com/itsfernn/auto-gnome-theme.nvim)
+- [circadian.nvim](https://github.com/gagbo/circadian.nvim)
