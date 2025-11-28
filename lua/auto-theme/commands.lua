@@ -8,7 +8,7 @@ function M.handle_command(opts)
 
   local auto_theme = require('auto-theme')
   local themes = require('auto-theme.themes')
-  local watcher = require('auto-theme.watcher')
+  -- local watcher = require('auto-theme.watcher')
 
   if cmd == 'status' then
     local current = themes.get_current()

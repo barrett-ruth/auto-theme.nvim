@@ -1,23 +1,6 @@
+[selene]
+base = "lua51"
+name = "vim"
+
 [vim]
-any = true
-
-[vim.log.levels]
-any = true
-
-[vim.g]
-any = true
-
-[vim.fn]
-any = true
-
-[vim.api]
-any = true
-
-[vim.o]
-any = true
-
-[vim.cmd]
-any = true
-
-[vim.health]
 any = true
