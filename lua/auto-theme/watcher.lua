@@ -37,8 +37,14 @@ function M._start_macos_watcher()
     return
   end
 
-  job_id = vim.fn.jobstart({ 'uv', 'run', 'python', python_script }, {
+  local env = vim.fn.environ()
+  env.VIRTUAL_ENV = ''
+  env.PYTHONPATH = ''
+  env.CONDA_PREFIX = ''
+
+  job_id = vim.fn.jobstart({ 'uv', 'run', python_script }, {
     cwd = plugin_dir,
+    env = env,
     on_stdout = function(_, data, _)
       for _, line in ipairs(data) do
         if line ~= '' then
@@ -80,8 +86,14 @@ function M._start_linux_watcher()
     return
   end
 
-  job_id = vim.fn.jobstart({ 'uv', 'run', 'python', python_script }, {
+  local env = vim.fn.environ()
+  env.VIRTUAL_ENV = ''
+  env.PYTHONPATH = ''
+  env.CONDA_PREFIX = ''
+
+  job_id = vim.fn.jobstart({ 'uv', 'run', python_script }, {
     cwd = plugin_dir,
+    env = env,
     on_stdout = function(_, data, _)
       for _, line in ipairs(data) do
         if line ~= '' then
