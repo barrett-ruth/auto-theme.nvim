@@ -6,6 +6,13 @@ https://github.com/user-attachments/assets/cc3a93d3-0ed2-448f-b97e-a133de769626
 
 Supports Linux & macOS.
 
+> Note, [as of
+> v0.11.5](https://github.com/neovim/neovim/commit/d460928263d0ff53283f301dfcb85f5b6e17d2ac),
+> NeoVim dynamically switches `vim.o.background` according to the system
+> theme. This plugin may be
+> replaceable with an autocmd on `OptionSet` with pattern `background`. Use at
+> your own discretion.
+
 ## Requirements
 
 - Neovim >= 0.10.0
